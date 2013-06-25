@@ -1,4 +1,7 @@
 Syukeikun::Application.routes.draw do
+  resources :movies
+
+
   resources :screenings
 
   resources :users
