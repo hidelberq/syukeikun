@@ -1,4 +1,7 @@
 Syukeikun::Application.routes.draw do
+  resources :screenings
+
+
   resources :users
 
 
