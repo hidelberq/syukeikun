@@ -1,17 +1,11 @@
-<h1>Listing screenings</h1>
+<h1>東京理科大学映画研究部</h1>
+
+<h2>上映会一覧</h2>
 
 <table>
-  <tr>
-    <th>Nth</th>
-    <th>Subtitle</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
 <% @screenings.each do |screening| %>
   <tr>
-    <td><%= screening.nth %></td>
+    <td>第<%= screening.nth %>回</td>
     <td><%= screening.subtitle %></td>
     <td><%= link_to 'Show', screening %></td>
     <td><%= link_to 'Edit', edit_screening_path(screening) %></td>
