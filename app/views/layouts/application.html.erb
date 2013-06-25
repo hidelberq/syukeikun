@@ -8,6 +8,12 @@
 </head>
 <body>
 
+<% if current_user %>
+  ようこそ、<%= current_user.nickname %>さん
+<% else %>  
+  <%= link_to '登録', new_user_path %>
+<% end %>
+
 <%= yield %>
 
 </body>
