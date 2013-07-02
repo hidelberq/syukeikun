@@ -11,8 +11,12 @@
 <% @movies.each do |movie| %>
   <tr>
     <td><%= link_to movie.title, screening_movie_path(@screening, movie) %></td>
+    <td><%= link_to 'Edit', edit_screening_movie_path(@screening, movie) %></td>
+    <td><%= link_to 'Destroy', screening_movie_path(@screening, movie), method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
+
+<%= link_to 'New Movie', new_screening_movie_path(@screening) %>
