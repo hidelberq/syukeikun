@@ -1,8 +1,10 @@
 class MoviesController < ApplicationController
+  before_filter :find_screening
+  before_filter :authorize_admin, only: [:edit, :update, :new, :create, :destroy]
+
   # GET /movies
   # GET /movies.json
   def index
-    @screening = Screening.find(params[:screening_id])
     @movies = @screening.movies
 
     respond_to do |format|
@@ -25,7 +27,6 @@ class MoviesController < ApplicationController
   # GET /movies/new
   # GET /movies/new.json
   def new
-    @screening = Screening.find(params[:screening_id])
     @movie  = @screening.movies.new
 
     respond_to do |format|
@@ -36,14 +37,12 @@ class MoviesController < ApplicationController
 
   # GET /movies/1/edit
   def edit
-    @screening = Screening.find(params[:screening_id])
     @movie = @screening.movies.find(params[:id])
   end
 
   # POST /movies
   # POST /movies.json
   def create
-    @screening = Screening.find(params[:screening_id])
     @movie = @screening.movies.new(params[:movie])
 
     respond_to do |format|
@@ -60,7 +59,6 @@ class MoviesController < ApplicationController
   # PUT /movies/1
   # PUT /movies/1.json
   def update
-    @screening = Screening.find(params[:screening_id])
     @movie = @screening.movies.find(params[:id])
 
     respond_to do |format|
@@ -77,13 +75,23 @@ class MoviesController < ApplicationController
   # DELETE /movies/1
   # DELETE /movies/1.json
   def destroy
-    @screening = Screening.find(params[:screening_id])
     @movie = @screening.movies.find(params[:id])
     @movie.destroy
 
     respond_to do |format|
       format.html { redirect_to screening_movies_path(@screening) }
       format.json { head :no_content }
+    end
+  end
+
+  private
+  def find_screening
+    @screening = Screening.find(params[:screening_id])
+  end
+
+  def authorize_admin
+    unless current_user && current_user.admin?
+      redirect_to screening_movies_path(@screening)
     end
   end
 end
