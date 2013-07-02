@@ -2,7 +2,8 @@ class MoviesController < ApplicationController
   # GET /movies
   # GET /movies.json
   def index
-    @movies = Movie.all
+    @screening = Screening.find(params[:screening_id])
+    @movies = @screening.movies
 
     respond_to do |format|
       format.html # index.html.erb
