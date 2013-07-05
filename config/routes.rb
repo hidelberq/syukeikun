@@ -1,4 +1,7 @@
 Syukeikun::Application.routes.draw do
+  resources :reviews
+
+
   resources :screenings do
     resources :movies
   end
