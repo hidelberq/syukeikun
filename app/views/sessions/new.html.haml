@@ -1,0 +1,12 @@
+= form_tag({ action: :create }, class: 'form-horizontal') do |f|
+  .control-group
+    = label_tag :nickname, nil, class: 'control-label'
+    .controls
+      = text_field_tag :nickname
+  .control-group
+    = label_tag :password, nil, class: 'control-label'
+    .controls
+      = password_field_tag :password
+  .control-group
+    .controls
+      = submit_tag 'ログインする'
