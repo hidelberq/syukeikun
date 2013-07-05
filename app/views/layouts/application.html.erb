@@ -8,13 +8,20 @@
 </head>
 <body>
 
-<% if current_user %>
-  ようこそ、<%= current_user.nickname %>さん
-  <%= link_to 'ログアウト', logout_path, method: :delete %>
-<% else %>  
-  <%= link_to 'ログイン', login_path %>
-  <%= link_to '登録', new_user_path %>
-<% end %>
+<div class="navbar">	
+	<div class="navbar-inner">
+		<%= link_to "東京理科大学映画研究部", root_path, class: "brand" %>
+		<p class="navbar-text pull-right">
+			<% if current_user %>
+			  ようこそ、<%= current_user.nickname %>さん
+			  <%= link_to 'ログアウト', logout_path, method: :delete, class: 'navbar-link' %>
+			<% else %>  
+			  <%= link_to 'ログイン', login_path, class: 'navbar-link' %>
+			  <%= link_to '登録', new_user_path, class: 'navbar-link' %>
+			<% end %>
+		</p>	
+	</div>	
+</div>
 
 <%= yield %>
 
