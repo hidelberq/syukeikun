@@ -1,0 +1,15 @@
+%h1 東京理科大学映画研究部
+
+%h2 上映会一覧
+
+%table
+  - @screenings.each do |screening|
+    %tr
+      %td 第#{screening.nth}回
+      %td= link_to screening.subtitle, screening_movies_path(screening)
+      - if current_user && current_user.admin?
+        %td= link_to 'Edit', edit_screening_path(screening)
+        %td= link_to 'Destroy', screening, method: :delete, data: { confirm: 'Are you sure?' }
+
+- if current_user && current_user.admin? 
+  = link_to 'New Screening', new_screening_path 
