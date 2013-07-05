@@ -1,4 +1,7 @@
 class ReviewsController < ApplicationController
+  before_filter :find_screening
+  before_filter :find_movie
+
   # GET /reviews
   # GET /reviews.json
   def index
@@ -40,12 +43,12 @@ class ReviewsController < ApplicationController
   # POST /reviews
   # POST /reviews.json
   def create
-    @review = Review.new(params[:review])
+    @review = @movie.reviews.new(params[:review])
     @review.user = current_user if current_user
 
     respond_to do |format|
       if @review.save
-        format.html { redirect_to @review, notice: 'Review was successfully created.' }
+        format.html { redirect_to screening_movie_path(@screening, @movie), notice: 'Review was successfully created.' }
         format.json { render json: @review, status: :created, location: @review }
       else
         format.html { render action: "new" }
@@ -80,5 +83,14 @@ class ReviewsController < ApplicationController
       format.html { redirect_to reviews_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+  def find_screening
+    @screening = Screening.find(params[:screening_id])
+  end  
+
+  def find_movie
+    @movie = @screening.movies.find(params[:movie_id])
   end
 end
