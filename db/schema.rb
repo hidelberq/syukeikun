@@ -11,13 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130705152625) do
+ActiveRecord::Schema.define(:version => 20130705175703) do
 
   create_table "movies", :force => true do |t|
     t.string   "title"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.integer  "screening_id"
+    t.string   "description"
   end
 
   add_index "movies", ["screening_id"], :name => "index_movies_on_screening_id"
