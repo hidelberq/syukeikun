@@ -7,13 +7,15 @@
   <tr>
     <td>第<%= screening.nth %>回</td>
     <td><%= link_to screening.subtitle, screening_movies_path(screening) %></td>
-    <td><%= link_to 'Show', screening %></td>
+    <% if current_user && current_user.admin? %>
     <td><%= link_to 'Edit', edit_screening_path(screening) %></td>
     <td><%= link_to 'Destroy', screening, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
-
+<% if current_user && current_user.admin? %>
 <br />
 
 <%= link_to 'New Screening', new_screening_path %>
+<% end %>
