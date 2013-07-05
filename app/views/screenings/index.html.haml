@@ -2,11 +2,12 @@
 
 %h2 上映会一覧
 
-%table
+.row
   - @screenings.each do |screening|
-    %tr
-      %td 第#{screening.nth}回
-      %td= link_to screening.subtitle, screening_movies_path(screening)
+    .span4
+      %h2= link_to screening.subtitle, screening_movies_path(screening)
+      %p
+        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.  
       - if current_user && current_user.admin?
         %td= link_to 'Edit', edit_screening_path(screening)
         %td= link_to 'Destroy', screening, method: :delete, data: { confirm: 'Are you sure?' }

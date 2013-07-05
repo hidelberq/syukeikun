@@ -1,0 +1,14 @@
+%h1 映画一覧
+
+.row
+  - @movies.each do |movie|
+    .span4
+      %h2= link_to movie.title, screening_movie_path(@screening, movie)
+      %p
+        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.  
+
+    - if current_user && current_user.admin?
+      = link_to 'Edit', edit_screening_movie_path(@screening, movie) 
+      = link_to 'Destroy', screening_movie_path(@screening, movie), method: :delete, data: { confirm: 'Are you sure?' }
+
+= link_to 'New Movie', new_screening_movie_path(@screening) if current_user && current_user.admin? 
