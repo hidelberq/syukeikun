@@ -17,7 +17,9 @@ class MoviesController < ApplicationController
   # GET /movies/1.json
   def show
     @movie = Movie.find(params[:id])
-    @review = @movie.reviews.new
+    if current_user
+      @review = @movie.reviews.where(user_id: current_user.id).first_or_initialize
+    end
 
     respond_to do |format|
       format.html # show.html.erb
