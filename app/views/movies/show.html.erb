@@ -5,6 +5,6 @@
   <%= @movie.title %>
 </p>
 
-<%= render 'reviews/form' %>
+<%= render 'reviews/form' if current_user %>
 
 <%= link_to 'Back', screening_movies_path(@screening) %>

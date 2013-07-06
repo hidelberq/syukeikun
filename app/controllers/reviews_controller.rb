@@ -43,8 +43,7 @@ class ReviewsController < ApplicationController
   # POST /reviews
   # POST /reviews.json
   def create
-    @review = @movie.reviews.new(params[:review])
-    @review.user = current_user if current_user
+    @review = @movie.reviews.where(user_id: current_user.id).first_or_initialize(params[:review])
 
     respond_to do |format|
       if @review.save
@@ -60,11 +59,11 @@ class ReviewsController < ApplicationController
   # PUT /reviews/1
   # PUT /reviews/1.json
   def update
-    @review = Review.find(params[:id])
+    @review = @movie.reviews.where(user_id: current_user.id).first
 
     respond_to do |format|
       if @review.update_attributes(params[:review])
-        format.html { redirect_to @review, notice: 'Review was successfully updated.' }
+        format.html { redirect_to [@screening, @movie], notice: 'Review was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -88,7 +87,7 @@ class ReviewsController < ApplicationController
   private
   def find_screening
     @screening = Screening.find(params[:screening_id])
-  end  
+  end
 
   def find_movie
     @movie = @screening.movies.find(params[:movie_id])
