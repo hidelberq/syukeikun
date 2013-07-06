@@ -6,8 +6,7 @@
   - @screenings.each do |screening|
     .span4
       %h2= link_to screening.subtitle, screening_movies_path(screening)
-      %p
-        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.  
+      %p #{screening.description} 
       - if current_user && current_user.admin?
         %td= link_to 'Edit', edit_screening_path(screening)
         %td= link_to 'Destroy', screening, method: :delete, data: { confirm: 'Are you sure?' }
